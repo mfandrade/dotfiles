@@ -13,7 +13,7 @@ GITPROMPT='$(git branch &>/dev/null;\
 			fi) '$BBlue$Color_Off'"; \
 	else \
 		# @2 - Prompt when not in GIT repo
-		echo "'$BBlue$Color_Off'"; \
+		echo " '$BBlue$Color_Off'"; \
 	fi)'
 
 PS1="\n[$Yellow\u@\h$GITPROMPT\T]\n$IPurple!\!$Color_Off) $BIBlue\W$Color_Off/\$ "
