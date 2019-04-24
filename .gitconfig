@@ -1,18 +1,20 @@
 [alias]
-  br = branch
-  st = status
-  df = diff
-  co = checkout
-  com = commit
-  cout = checkout
-  comm = commit
-  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-  type = cat-file -t
-  dump = cat-file -p
+        br = branch
+        st = status
+        df = diff
+        co = checkout
+        com = commit
+        comm = commit
+        cout = checkout
+        hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+        type = cat-file -t
+        dump = cat-file -p
 [core]
-  editor = vim
-[user]
-  name = Marcelo F Andrade
-  email = mfandrade@gmail.com
+        editor = vim
+[merge]
+        tool = vimdiff
 [http]
-  sslverify = false
+        sslverify = false
+[user]
+        name = Marcelo F Andrade
+        email = mfandrade@gmail.com
