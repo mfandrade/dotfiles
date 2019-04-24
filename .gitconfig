@@ -1,3 +1,6 @@
+[user]
+        name = Marcelo F Andrade
+        email = mfandrade@gmail.com
 [alias]
         br = branch
         st = status
@@ -13,8 +16,3 @@
         editor = vim
 [merge]
         tool = vimdiff
-[http]
-        sslverify = false
-[user]
-        name = Marcelo F Andrade
-        email = mfandrade@gmail.com
