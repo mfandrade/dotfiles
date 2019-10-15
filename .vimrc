@@ -9,7 +9,7 @@ set listchars+=precedes:<,extends:>
 set tildeop
 
 set showbreak=+++       " Wrap-broken line prefix
-set textwidth=0         " Line wrap (number of cols)
+set textwidth=120       " Where to line wrap
 set showmatch           " Highlight matching brace
 set virtualedit=all     " Enable free-range cursor
 set errorbells          " Beep or flash screen on errors
@@ -37,7 +37,6 @@ set undolevels=99               " Number of undo levels
 set backspace=indent,eol,start  " Backspace behaviour
 
 " hard autowrap https://vi.stackexchange.com/a/375
-set textwidth=120
 highlight ColorColumn ctermbg=7 guibg=lightgrey
 let &colorcolumn="80,".join(range(120,999),",")
 
