@@ -33,12 +33,12 @@ set softtabstop=4       " Number of spaces per Tab
 " ADVANCED
 syntax on               " Syntax highlight
 set ruler               " Show row and column ruler information
-set undolevels=100              " Number of undo levels
+set undolevels=99               " Number of undo levels
 set backspace=indent,eol,start  " Backspace behaviour
 
 " hard autowrap https://vi.stackexchange.com/a/375
-set textwidth=80
-highlight ColorColumn ctermbg=0 guibg=lightgrey
+set textwidth=120
+highlight ColorColumn ctermbg=7 guibg=lightgrey
 let &colorcolumn="80,".join(range(120,999),",")
 
 " EXTRAS
@@ -71,5 +71,60 @@ au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=79
 " no tabexpand for Makefiles
 autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
 
-" automatically removes trailing spaces
+" automatically removes all trailing space
 autocmd Filetype c,cpp,java,php,yaml autocmd BufWritePre * %s/\s\+$//e
+
+" XML formatter
+function! DoFormatXML() range
+  " Save the file type
+  let l:origft = &ft
+
+  " Clean the file type
+  set ft=
+
+  " Add fake initial tag (so we can process multiple top-level elements)
+  exe ":let l:beforeFirstLine=" . a:firstline . "-1"
+  if l:beforeFirstLine < 0
+    let l:beforeFirstLine=0
+  endif
+  exe a:lastline . "put ='</PrettyXML>'"
+  exe l:beforeFirstLine . "put ='<PrettyXML>'"
+  exe ":let l:newLastLine=" . a:lastline . "+2"
+  if l:newLastLine > line('$')
+    let l:newLastLine=line('$')
+  endif
+
+  " Remove XML header
+  exe ":" . a:firstline . "," . a:lastline . "s/<\?xml\\_.*\?>\\_s*//e"
+
+  " Recalculate last line of the edited code
+  let l:newLastLine=search('</PrettyXML>')
+
+  " Execute external formatter
+  exe ":silent " . a:firstline . "," . l:newLastLine . "!xmllint --noblanks --format --recover -"
+
+  " Recalculate first and last lines of the edited code
+  let l:newFirstLine=search('<PrettyXML>')
+  let l:newLastLine=search('</PrettyXML>')
+	
+  " Get inner range
+  let l:innerFirstLine=l:newFirstLine+1
+  let l:innerLastLine=l:newLastLine-1
+
+  " Remove extra unnecessary indentation
+  exe ":silent " . l:innerFirstLine . "," . l:innerLastLine "s/^  //e"
+
+  " Remove fake tag
+  exe l:newLastLine . "d"
+  exe l:newFirstLine . "d"
+
+  " Put the cursor at the first line of the edited code
+  exe ":" . l:newFirstLine
+
+  " Restore the file type
+  exe "set ft=" . l:origft
+endfunction
+command! -range=% FormatXML <line1>,<line2>call DoFormatXML()
+
+nmap <silent> <leader>x :%FormatXML<CR>
+vmap <silent> <leader>x :FormatXML<CR>
