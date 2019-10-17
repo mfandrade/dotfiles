@@ -1,44 +1,68 @@
 " GENERAL
-set nocompatible        " Gotta be first
-set number              " Show line numbers
-set relativenumber      " Better, show relative numbers
-set linebreak           " Break lines at word (requires Wrap lines)
+set nocompatible        " gotta be first
+set encoding=utf-8      " utf-8 is now widely used, right?
+set number              " number lines
+set relativenumber      " better, show relative numbers
+set linebreak           " break lines at word (requires wrap lines)
 set nowrap
 set sidescroll=5
 set listchars+=precedes:<,extends:>
 set tildeop
 
-set showbreak=+++       " Wrap-broken line prefix
-set textwidth=120       " Where to line wrap
-set showmatch           " Highlight matching brace
-set virtualedit=all     " Enable free-range cursor
-set errorbells          " Beep or flash screen on errors
-set visualbell          " Use visual bell (no beeping)
+set showbreak=+++       " wrap-broken line prefix
+set textwidth=120       " line wrap (number of cols)
+set showmatch           " highlight matching brace
+set virtualedit=all     " enable free-range cursor
+set errorbells          " beep or flash screen on errors
+set visualbell          " use visual bell (no beeping)
+set laststatus=1        " file name and status info when using multiple tabs
+set ruler               " show row and column ruler information
+set showcmd             " show (partial) command in the last line
+
+" VIM BEHAVIOUR
 
 " SEARCH
-set hlsearch            " Highlight all search results
-set smartcase           " Enable smart-case search
-set ignorecase          " Always case-insensitive
-set incsearch           " Searches for strings incrementally
+set hlsearch            " highlight all search results
+set smartcase           " enable smart-case search
+set ignorecase          " always case-insensitive
+set incsearch           " search as you type
 
 " INDENT
-set autoindent          " Auto-indent new lines
-set cindent             " Use C style program indenting
-set expandtab           " Use spaces instead of tabs
-set shiftwidth=4        " Number of auto-indent spaces
-set smartindent         " Enable smart-indent
-set smarttab            " Enable smart-tabs
-set softtabstop=4       " Number of spaces per Tab
+set autoindent          " auto-indent new lines
+set cindent             " use C style program indenting
+set expandtab           " use spaces instead of tabs
+set shiftwidth=4        " number of auto-indent spaces
+set smartindent         " enable smart-indent
+set smarttab            " enable smart-tabs
+set softtabstop=4       " number of spaces per Tab
 
-" ADVANCED
-syntax on               " Syntax highlight
-set ruler               " Show row and column ruler information
-set undolevels=99               " Number of undo levels
+" ADVANCED VIM BEHAVIOUR
+" syntax highlight when terminal has colors
+if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
+  syntax on
+endif
+set undolevels=99        " how many (ctrl-u) undo levels
+set history=50           " how many (: and /) commands and searchs can be saved
+set autowrite            " autosave?
+set nobackup
+set nowritebackup
+set noswapfile 
 set backspace=indent,eol,start  " Backspace behaviour
+set modelines=0          " disable modelines as a security precaution
+set nomodeline
+set splitbelow
+set splitright
 
 " hard autowrap https://vi.stackexchange.com/a/375
 highlight ColorColumn ctermbg=7 guibg=lightgrey
 let &colorcolumn="80,".join(range(120,999),",")
+
+" SPLITS - https://thoughtbot.com/blog/vim-splits-move-faster-and-more-naturally
+" save a keystroke avoiding ctrl-w to navigate between splits
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 " EXTRAS
 " doesn't indent pasted code - https://stackoverflow.com/a/38258720/62202
