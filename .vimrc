@@ -10,7 +10,8 @@ set listchars+=precedes:<,extends:>
 set tildeop
 
 set showbreak=+++       " wrap-broken line prefix
-set textwidth=120       " line wrap (number of cols)
+set textwidth=80        " line wrap (number of cols)
+set colorcolumn=+1      " make it obvious where the 80 col is
 set showmatch           " highlight matching brace
 set virtualedit=all     " enable free-range cursor
 set errorbells          " beep or flash screen on errors
@@ -18,6 +19,7 @@ set visualbell          " use visual bell (no beeping)
 set laststatus=1        " file name and status info when using multiple tabs
 set ruler               " show row and column ruler information
 set showcmd             " show (partial) command in the last line
+
 
 " VIM BEHAVIOUR
 
@@ -53,16 +55,42 @@ set nomodeline
 set splitbelow
 set splitright
 
+" this is vim!
+nnoremap <Right> :echoe "Use l "<CR>
+nnoremap <Left> :echoe "Use h "<CR>
+nnoremap <Down> :echoe "Use j "<CR>
+nnoremap <Up> :echoe "Use k "<CR>
+
 " hard autowrap https://vi.stackexchange.com/a/375
-highlight ColorColumn ctermbg=7 guibg=lightgrey
-let &colorcolumn="80,".join(range(120,999),",")
+"highlight ColorColumn ctermbg=7 guibg=lightgrey
+"let &colorcolumn="80"
+
+
+
+augroup vimrcEx
+  autocmd!
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it for commit messages, when the position is invalid, or when
+  " inside an event handler (happens when dropping a file on gvim).
+  autocmd BufReadPost *
+    \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+augroup END
+
+" autocomplete words when spell check is on
+set complete+=kspell            
+
+" switch between the last two files
+nnoremap <Leader><Leader> <C-^>
+
 
 " SPLITS - https://thoughtbot.com/blog/vim-splits-move-faster-and-more-naturally
 " save a keystroke avoiding ctrl-w to navigate between splits
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
 
 " EXTRAS
 " doesn't indent pasted code - https://stackoverflow.com/a/38258720/62202
