@@ -3,8 +3,7 @@
         email = mfandrade@gmail.com
 [alias]
         br = branch
-        st = status
-        df = diff
+        st = status --short
         co = checkout
         com = commit
         comm = commit
@@ -16,3 +15,14 @@
         editor = vim
 [merge]
         tool = vimdiff
+        ff = only
+[diff]
+        colorMoved = zebra
+[push]
+        default = current
+[fetch]
+        prune = true
+[rebase]
+        autosquash = true
+[color]
+        ui = auto
