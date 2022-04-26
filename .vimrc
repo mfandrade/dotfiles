@@ -1,181 +1,129 @@
-" GENERAL
-set nocompatible        " gotta be first
-set encoding=utf-8      " utf-8 is now widely used, right?
-set number              " number lines
-set relativenumber      " better, show relative numbers
-set linebreak           " break lines at word (requires wrap lines)
-set nowrap
-set sidescroll=5
-set listchars+=precedes:<,extends:>
-set tildeop
+" An example for a vimrc file.
+" https://github.com/vim/vim/blob/master/runtime/vimrc_example.vim
+"
+" Maintainer:	Bram Moolenaar <Bram@vim.org>
+" Last change:	2019 Dec 17
 
-set showbreak=+++       " wrap-broken line prefix
-set textwidth=80        " line wrap (number of cols)
-set colorcolumn=+1      " make it obvious where the 80 col is
-set showmatch           " highlight matching brace
-set virtualedit=all     " enable free-range cursor
-set errorbells          " beep or flash screen on errors
-set visualbell          " use visual bell (no beeping)
-set laststatus=1        " file name and status info when using multiple tabs
-set ruler               " show row and column ruler information
-set showcmd             " show (partial) command in the last line
+" Get the defaults that most users want.
+source $VIMRUNTIME/defaults.vim
 
+" Default color scheme (default,desert,elflord,pablo)
+colorscheme desert
 
-" VIM BEHAVIOUR
-
-" SEARCH
-set hlsearch            " highlight all search results
-set smartcase           " enable smart-case search
-set ignorecase          " always case-insensitive
-set incsearch           " search as you type
-
-" INDENT
-set autoindent          " auto-indent new lines
-set cindent             " use C style program indenting
-set expandtab           " use spaces instead of tabs
-set shiftwidth=4        " number of auto-indent spaces
-set smartindent         " enable smart-indent
-set smarttab            " enable smart-tabs
-set softtabstop=4       " number of spaces per Tab
-
-" ADVANCED VIM BEHAVIOUR
-" syntax highlight when terminal has colors
-if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
-  syntax on
-endif
-set undolevels=99        " how many (ctrl-u) undo levels
-set history=50           " how many (: and /) commands and searchs can be saved
-set autowrite            " autosave?
+" don't keep a backup file
 set nobackup
-set nowritebackup
-set noswapfile 
-set backspace=indent,eol,start  " Backspace behaviour
-set modelines=0          " disable modelines as a security precaution
-set nomodeline
-set splitbelow
-set splitright
+if has('persistent_undo')
+  " keep an undo file (undo changes after closing)
+  set undofile
+endif
 
-" this is vim!
-nnoremap <Right> :echoe "Use l "<CR>
-nnoremap <Left> :echoe "Use h "<CR>
-nnoremap <Down> :echoe "Use j "<CR>
-nnoremap <Up> :echoe "Use k "<CR>
+" Switch on highlighting the last used search pattern.
+" (<C-L> to temporarily turn it off, see mapping)
+if &t_Co > 2 || has('gui_running')
+  set hlsearch
+endif
 
-" hard autowrap https://vi.stackexchange.com/a/375
-"highlight ColorColumn ctermbg=7 guibg=lightgrey
-"let &colorcolumn="80"
-
-
-
+" Put these in an autocmd group, so that we can delete them easily.
 augroup vimrcEx
-  autocmd!
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it for commit messages, when the position is invalid, or when
-  " inside an event handler (happens when dropping a file on gvim).
-  autocmd BufReadPost *
-    \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal g`\"" |
-    \ endif
+  au!
+
+  " For all text files set 'textwidth' to 78 characters.
+  autocmd FileType text setlocal textwidth=78
 augroup END
 
-" autocomplete words when spell check is on
-set complete+=kspell            
+" Add optional packages.
+"
+" The matchit plugin makes the % command work better, but it is not backwards
+" compatible.
+" The ! means the package won't be loaded right away but when plugins are
+" loaded during initialization.
+if has('syntax') && has('eval')
+  packadd! matchit
+endif
 
-" switch between the last two files
-nnoremap <Leader><Leader> <C-^>
+" A minimal, but feature rich, example .vimrc
+" https://vim.fandom.com/wiki/Example_vimrc
+
+" Many Vim users likely the flexibility that set hidden offers, allowing them
+" to move around files quickly without worrying about whether they’ve written
+" to disk.
+set hidden
+
+" Use case insensitive search, except when using capital letters.
+set ignorecase
+set smartcase
+" Search as you type.
+set incsearch
+
+" Line numbering is always useful.
+set number
+set relativenumber
+
+" When opening a new line and no filetype-specific indenting is enabled, keep
+" the same indent as the line you're currently on.  Useful for READMEs, etc.
+set autoindent
+
+" Stop certain movements from always going to the first character of a line.
+" While this behaviour deviates from that of Vi, it does what most people
+" expect in a text edior.
+"set nostartofline
+
+" Always display the status line, even if only one window is displayed.
+set laststatus=2
+
+" Raise a dialog asking to save changed files instead of failing on quit.
+set confirm
+
+" Use visual bell instead of annoying beeping when something wrong happens.
+set visualbell
+
+" Reset terminal code for visual bell, silently doing nothing on flash.
+"set t_vb=
+
+" Enable use of the mouse for all modes.
+"if has('mouse')
+"  set mouse=a
+"endif
+
+" Set command windows height to 2 lines, to avoid many cases of having to
+" 'press <Enter> to continue'.
+set cmdheight=2
+
+" Quickly time out on keycodes, but never time out on mappings.
+set notimeout ttimeout ttimeoutlen=200
+
+" Use <F11> to toggle between 'paste' and 'nopaste'.
+set pastetoggle=<F11>
 
 
-" SPLITS - https://thoughtbot.com/blog/vim-splits-move-faster-and-more-naturally
-" save a keystroke avoiding ctrl-w to navigate between splits
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
+" Indentation settings for using 4 spaces instead of tabs.
+" Don't change 'tabstop' from its default value of 8 with this setup.
+set shiftwidth=4
+set softtabstop=4
+set expandtab
 
-" EXTRAS
-" doesn't indent pasted code - https://stackoverflow.com/a/38258720/62202
-let &t_SI .= "\<Esc>[?2004h"
-let &t_EI .= "\<Esc>[?2004l"
-inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
-function! XTermPasteBegin()
-  set pastetoggle=<Esc>[201~
-  set paste
-  return ""
-endfunction
+" Display tabs as 4 characters wide.
+set tabstop=4
 
-" space to fold stuff - https://vim.fandom.com/wiki/Folding
-nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
-vnoremap <Space> zf
-highlight Folded ctermbg=Black ctermfg=Darkgray
+" Useful mappings
+" Y to act like D and C, i.e. to yank until EOL rather like act as yy.
+map Y y$
 
-" xml folding - https://stackoverflow.com/a/44053643
-let g:xml_syntax_folding=1
-au FileType xml setlocal foldmethod=syntax
+" <C-L> (redraw screen) to also turn off search highlighting.
+nnoremap <C-L> :nohlsearch<CR><C-L>
 
-" yaml stuff - https://lornajane.net/posts/2018/vim-settings-for-working-with-yaml
-au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+" Let's use vim navigation keys.
+for key in ['<Up>', '<Down>', '<Left>', '<Right>']
+  exec 'nnoremap' key '<Nop>'
+  exec 'vnoremap' key '<Nop>'
+  exec 'inoremap' key '<Nop>'
+  "exec 'cnoremap' key '<Nop>'
+endfor
 
-" python pep8
-au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=79 expandtab autoindent fileformat=unix
+" How to show invisible characters.
+nnoremap <C-H> :set list!<CR>
+set showbreak=+++\ " when wrapping long lines
+set listchars=tab:»\ ,eol:⁋,nbsp:¤,space:·,trail:•,extends:⟩,precedes:⟨
 
-" no tabexpand for Makefiles
-autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
-
-" automatically removes all trailing space
-autocmd Filetype c,cpp,java,php,yaml autocmd BufWritePre * %s/\s\+$//e
-
-" XML formatter
-function! DoFormatXML() range
-  " Save the file type
-  let l:origft = &ft
-
-  " Clean the file type
-  set ft=
-
-  " Add fake initial tag (so we can process multiple top-level elements)
-  exe ":let l:beforeFirstLine=" . a:firstline . "-1"
-  if l:beforeFirstLine < 0
-    let l:beforeFirstLine=0
-  endif
-  exe a:lastline . "put ='</PrettyXML>'"
-  exe l:beforeFirstLine . "put ='<PrettyXML>'"
-  exe ":let l:newLastLine=" . a:lastline . "+2"
-  if l:newLastLine > line('$')
-    let l:newLastLine=line('$')
-  endif
-
-  " Remove XML header
-  exe ":" . a:firstline . "," . a:lastline . "s/<\?xml\\_.*\?>\\_s*//e"
-
-  " Recalculate last line of the edited code
-  let l:newLastLine=search('</PrettyXML>')
-
-  " Execute external formatter
-  exe ":silent " . a:firstline . "," . l:newLastLine . "!xmllint --noblanks --format --recover -"
-
-  " Recalculate first and last lines of the edited code
-  let l:newFirstLine=search('<PrettyXML>')
-  let l:newLastLine=search('</PrettyXML>')
-	
-  " Get inner range
-  let l:innerFirstLine=l:newFirstLine+1
-  let l:innerLastLine=l:newLastLine-1
-
-  " Remove extra unnecessary indentation
-  exe ":silent " . l:innerFirstLine . "," . l:innerLastLine "s/^  //e"
-
-  " Remove fake tag
-  exe l:newLastLine . "d"
-  exe l:newFirstLine . "d"
-
-  " Put the cursor at the first line of the edited code
-  exe ":" . l:newFirstLine
-
-  " Restore the file type
-  exe "set ft=" . l:origft
-endfunction
-command! -range=% FormatXML <line1>,<line2>call DoFormatXML()
-
-nmap <silent> <leader>x :%FormatXML<CR>
-vmap <silent> <leader>x :FormatXML<CR>
+" We don't like trailling spaces.
+match ErrorMsg '\s\+$'
