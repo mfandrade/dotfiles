@@ -1,0 +1,22 @@
+return {
+  "stevearc/conform.nvim",
+  opts = {
+    formatters_by_ft = {
+      lua = { "stylua" },
+      xml = { "xmllint" },
+      javascript = { "standardjs" },
+      java = { "google-java-format" },
+    },
+    formatters = {
+      xmllint = {
+        command = "xmllint",
+        env = { XMLLINT_INDENT = "    " },
+      },
+      ["google-java-format"] = {
+        command = vim.fn.stdpath("data") .. "/mason/bin/google-java-format",
+        args = { "-" },
+        stdin = true,
+      },
+    },
+  },
+}

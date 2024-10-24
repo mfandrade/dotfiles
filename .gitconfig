@@ -1,28 +1,57 @@
 [user]
 	name = Marcelo F Andrade
 	email = mfandrade@gmail.com
+
 [core]
 	editor = vim
+	symlinks = true
+	pager = delta --side-by-side
+
 [alias]
 	br = branch
 	co = checkout
 	st = status --short
-    comm = commit -a
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-	last = show --format=oneline --unified=0 --abbrev-commit
+  last = log -n1 --oneline
+	amend = commit --amend --edit
+	append = commit --amend --no-edit
+	unstage = reset HEAD --
+	diffpatch = "!git --no-pager diff --no-color"
 
-    confedit = config --global -e
-    up    = !git pull --rebase --prune $@ && git submodule update --init --recursive
-    #undo = reset HEAD~1 --mixed
-    amend = commit -a --amend
+	push = push --force-with-lease
+	list = log --pretty=format:\"%C(yellow)%h%C(cyan)%d%C(green) %s %C(white)- %an, %ar%Creset\" --decorate --numstat
 
-    new-branch = "!f() { if [ $# -ne 1 ]; then echo 'ERROR: Please define a branch name'; return 1; fi; B=\"$@\"; D=$(git config --get init.defaultBranch || echo master); git checkout $D && git checkout -b $B; }; f >/dev/null"
-    feat = "!f() { if [ $# -ne 1 ]; then echo 'Please define a descriptive feature name'; return 1; fi; git new-branch feat/$(slugify $@); }; f"
-    fix = "!f() { if [ $# -ne 1 ]; then echo 'Please define a descriptive fix name'; return 1; fi; git new-branch fix/$(slugify $@); }; f"
-    done = "!f() { B=$(git branch --show-current); if [ \"${B%%feat/*}\" ]; then echo 'Not in a workflow branch'; return 1; fi; git checkout $(git config --get init.defaultBranch || echo master) && git merge $B && git branch -d $B; }; f"
+	feat = "!f() { git checkout devel && git checkout -b feat/$(slug \"$@\" ); }; f"
+	release = "!f() { git checkout devel && git checkout -b release/$(slug \"$@\" ); }; f"
+	hotfix = "!f() { git checkout main && git checkout -b hot/$(slug \"$@\" ); }; f"
+	finish = "!f() { CURRENT_BRANCH=$(git symbolic-ref --short HEAD 2>/dev/null); if test -z \"$CURRENT_BRANCH\"; then echo 'Error: Not currently on any branch.'; exit 1; fi; if ! echo \"$CURRENT_BRANCH\" | grep -q '^feat/'; then echo 'Error: Current branch is not a feature branch (feat/*).'; exit 1; fi; git checkout devel && git merge \"$CURRENT_BRANCH\" && git branch -d \"$CURRENT_BRANCH\"; }; f"
+	discard = "!f() { CURRENT_BRANCH=$(git symbolic-ref --short HEAD 2>/dev/null); if test -z \"$CURRENT_BRANCH\"; then echo 'Error: Not currently on any branch.'; exit 1; fi; if ! echo \"$CURRENT_BRANCH\" | grep -q '^feat/'; then echo 'Error: Current branch is not a feature branch (feat/*).'; exit 1; fi; git checkout devel && git branch -D \"$CURRENT_BRANCH\"; }; f"
+	publish = "!f() { git push origin `git symbolic-ref --short HEAD`; echo Publishing; }; f"
 
 [pull]
 	rebase = true
 
 [init]
-    defaultBranch = main
+	defaultBranch = main
+
+[column]
+	ui = auto
+
+[branch]
+	sort = -committerdate
+; ----------------------------------------------------------------------------
+[include]
+  path = ~/.config/themes.gitconfig
+
+[delta]
+  ; features = calochortus-lyallii
+  features = arctic-fox
+  ; features = chameleon
+; [interactive]
+;		diffFilter = delta --color-only
+;
+; [delta]
+;		navigate = true
+;		side-by-side = true
+;		line-numbers = true
+;   syntax-theme = "Solarized (dark)"
