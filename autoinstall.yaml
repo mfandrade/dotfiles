@@ -1,0 +1,35 @@
+autoinstall:
+    version: 1
+    early-commands:
+        - ping -c1 ubuntu.com
+    locale: en_US
+    keyboard:
+        layout: br
+        variant: ""
+        toggle: "caps:swapescape"
+    identity:
+        realname: "Marcelo F Andrade"
+        username: mfa
+        password: "$y$j9T$pAiiq312Wz5pHAsZoTA0j.$QOWq/FvrIO29YKEzzA25AuLO4GWUV7dhFTvrTcz.25A"
+        hostname: darkstar
+    codecs:
+        install: true
+    drivers:
+        install: true
+    snaps:
+        - name: "snapd-desktop-integration"
+          channel: latest/stable
+        - name: "Snap Store"
+          channel: latest/stable
+        - name: "firmware-updater"
+          channel: latest/stable
+        - name: "firefox"
+          channel: latest/stable
+    packages:
+        - git
+        - curl
+        - ca-certificates
+    late-commands:
+        - sed -ie 's/GRUB_TIMEOUT=.*/GRUB_TIMEOUT=5/' /target/etc/default/grub
+    error-commands:
+        - tar c /var/log/installer | nc 192.168.0.1 1000
