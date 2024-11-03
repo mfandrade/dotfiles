@@ -1,0 +1,7 @@
+alias ls='ls --color'
+alias sudo='sudo '
+alias apt-get='nala'
+alias vim='nvim'
+alias vi='nvim'
+alias view='nvim -R'
+alias vimdiff='nvim -d'
