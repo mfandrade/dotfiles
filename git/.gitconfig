@@ -1,0 +1,8 @@
+[user]
+	name = Marcelo F Andrade
+  email = mfandrade@gmail.com
+  signingkey = 608DE262EFB14FE3
+[commit]
+	gpgSign = false
+[init]
+	defaultBranch = main
