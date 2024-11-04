@@ -92,3 +92,7 @@ lazyvim: pkgsbasic asdf_installs
 # https://avatars.githubusercontent.com/u/24952?v=4
 # https://instagram.fbel1-1.fna.fbcdn.net/v/t51.2885-19/434999623_253637291073528_8914023972321892718_n.jpg?stp=dst-jpg_s150x150&_nc_ht=instagram.fbel1-1.fna.fbcdn.net&_nc_cat=100&_nc_ohc=i1Hy2312itwQ7kNvgHP8z5-&_nc_gid=4f00e04161364a9d89a007b36e0f5244&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AYAnZey11C2CXi-gZRAWjBxcnrjM9V1U-TOz6Ku8osI2IA&oe=672CDFB9&_nc_sid=8b3546
 o
+
+# TODO: alt-tab to switch only on current workspace in gnome
+# https://askubuntu.com/a/759740/1888004
+# gsettings set org.gnome.shell.app-switcher current-workspace-only true
