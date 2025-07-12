@@ -1,0 +1,20 @@
+[init]
+  defaultBranch = main
+
+[user]
+  name = Marcelo F Andrade
+  email = mfandrade@gmail.com
+  signingkey = 608DE262EFB14FE3
+
+[commit]
+  gpgSign = false
+
+[alias]
+  co = checkout
+  st = status -s
+  br = branch
+  last = log -n1 --oneline
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+
+[diff]
+  external = difft --display=side-by-side-show-both
