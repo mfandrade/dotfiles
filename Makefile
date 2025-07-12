@@ -115,5 +115,6 @@ lazyvim: git
 	# }}}
 
 # tmux {{{
-tmux: curl
+tmux: curl tmux
+	curl -O https://raw.githubusercontent.com/mfandrade/dotfiles/refs/heads/main/tmux/.tmux.conf
 # }}}
