@@ -109,7 +109,7 @@ asdf_plugins: asdf
 
 # lazyvim {{{
 .PHONY := lazyvim
-lazyvim: git
+lazyvim: git asdf_plugins
 	rm -rf ~/.config/nvim/ ~/.local/share/nvim/ ~/.local/state/nvim/ ~/.cache/nvim/
 	git clone https://github.com/mfandrade/lazyvim ~/.config/nvim && rm -rf ~/.config/nvim/.git
 	# }}}
