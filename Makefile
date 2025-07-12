@@ -77,19 +77,7 @@ asdf_conf_bash: asdf bash
 CONF_FISH := ~/.config/fish/conf.d/asdf.fish
 .PHONY := asdf_conf_fish
 asdf_conf_fish: asdf fish
-	echo '# ASDF configuration code' > $(CONF_FISH) && \
-	echo 'if test -z $$ASDF_DATA_DIR' >> $(CONF_FISH) && \
-	echo '    set _asdf_shims "$$HOME/.asdf/shims"' >> $(CONF_FISH) && \
-	echo 'else' >> $(CONF_FISH) && \
-	echo '    set _asdf_shims "$$ASDF_DATA_DIR/shims"' >> $(CONF_FISH) && \
-	echo 'end' >> $(CONF_FISH) && \
-	echo '' >> $(CONF_FISH) && \
-	echo '# Do not use fish_add_path (added in Fish 3.2) because it' >> $(CONF_FISH) && \
-	echo '# potentially changes the order of items in PATH' >> $(CONF_FISH) && \
-	echo 'if not contains $$_asdf_shims $$PATH' >> $(CONF_FISH) && \
-	echo '    set -gx --prepend PATH $$_asdf_shims' >> $(CONF_FISH) && \
-	echo 'end' >> $(CONF_FISH) && \
-	echo 'set --erase _asdf_shims' >> $(CONF_FISH)
+	curl -o $(CONF_FISH) https://raw.githubusercontent.com/mfandrade/dotfiles/refs/heads/main/asdf/.config/fish/conf.d/asdf.fish
 	. $(CONF_FISH)
 # }}}
 
