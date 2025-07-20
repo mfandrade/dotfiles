@@ -82,7 +82,7 @@ asdf_conf_fish: asdf fish
 # }}}
 
 # asdf_plugins {{{
-PLUGINS := neovim lua/5.1.5 java/latest:oracle nodejs ripgrep fd tree-sitter lazygit bat difftastic shfmt
+PLUGINS := neovim lua/5.1.5 java/latest:oracle nodejs ripgrep fd tree-sitter lazygit bat difftastic shfmt hurl
 .PHONY := asdf_plugins
 asdf_plugins: asdf
 	for plugin_version in $(PLUGINS); do \
