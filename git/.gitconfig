@@ -48,9 +48,9 @@
   cached = diff --cached
 
   # ----------------------------------------
-  a = add
-  aa = add --all
-  ap = add --patch
+  unadd = restore --staged
+  stage = add
+  unstage = restore --staged
   patch = add --patch
 
   # ----------------------------------------
