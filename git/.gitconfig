@@ -70,4 +70,7 @@
   rdel = remote rm
 
 [pull]
-	rebase = true
+  rebase = true
+
+[include]
+  path = ~/.gitconfig.extra
