@@ -1,3 +1,6 @@
+# cat
+alias cat='bat -n'
+
 # git
 alias ga='git add'
 alias gaa='git add --all'
