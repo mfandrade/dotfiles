@@ -9,6 +9,9 @@
 [commit]
   gpgSign = false
 
+[diff]
+  external = difft --display side-by-side --syntax-highlight off
+
 [alias]
   co = checkout
   st = status -s
