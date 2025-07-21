@@ -22,11 +22,13 @@
   bru = branch --set-upstream-to
 
   # ----------------------------------------
-  c = commit
   ca = commit --all
   cm = commit --message
-  cam = commit --all --message
   cra = commit --reset-author
+  com = commit
+  coma = commit --all
+  comm = commit --message
+  comra = commit --reset-author
   am = commit --amend
   amend = commit --amend
   amm = commit --amend --message
