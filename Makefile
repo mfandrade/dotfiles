@@ -1,19 +1,5 @@
 # vim: fdm=marker fmr={{{,}}}
 
-# TODO make it easy to install other fonts
-# https://stackoverflow.com/a/74742720
-
-# ~/.local/share/fonts/JetBrainsMonoNerdFont-Regular.ttf:
-# 	wget -nv https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/JetBrainsMono.tar.xz \
-# 		&& tar -xJf nerdfont.txz -C ~/.local/share/fonts JetBrainsMonoNerdFont-Regular.ttf \
-# 		&& fc-cache -fv
-
-# ~/.local/share/fonts/UbuntuMonoNerdFont-Regular.ttf:
-# 	wget -O nerdfont.txz -nv https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/UbuntuMono.tar.xz \
-# 		&& tar -xJf nerdfont.txz -C ~/.local/share/fonts UbuntuMonoNerdFont-Regular.ttf && rm nerdfont.txz \
-# 		&& fc-cache -fv
-#
-
 # home content
 # -----------------------------------------------------------------------------
 HOMECONTENT = ~/xdg ~/src ~/bin
