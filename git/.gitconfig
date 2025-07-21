@@ -43,7 +43,8 @@
   # ----------------------------------------
   co = checkout
   cob = checkout -b
-  discard-changes = checkout .
+  discard = checkout
+  discard-all = checkout .
 
   # ----------------------------------------
   d = diff
