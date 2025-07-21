@@ -37,7 +37,7 @@
 
   # ----------------------------------------
   s = status
-  ss = status
+  ss = status --ignored=matching --untracked-files=all
   st = status --short
 
   # ----------------------------------------
