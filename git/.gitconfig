@@ -37,7 +37,8 @@
 
   # ----------------------------------------
   s = status
-  st = status -s
+  ss = status
+  st = status --short
 
   # ----------------------------------------
   co = checkout
