@@ -1,0 +1,5 @@
+# You can preview the config here: https://ghostty.zerebos.com/
+
+theme = light:"GitHub-Light-Default",dark:"GitHub-Dark-High-Contrast"
+font-family = "JetBrainsMono Nerd Font"
+background-opacity = 0.85
