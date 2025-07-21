@@ -58,6 +58,8 @@
 
   # ----------------------------------------
   r = remote
-  rv = remote -v
+  rv = remote --verbose
+  rls = remote --verbose
+  rem = remote --verbose
   radd = remote add
   rdel = remote rm
