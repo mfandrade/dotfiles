@@ -13,11 +13,51 @@
   external = difft --display side-by-side --syntax-highlight off
 
 [alias]
-  co = checkout
-  st = status -s
+  # ----------------------------------------
   br = branch
-  last = log -n1 --oneline
-  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  bra = branch --all
+  brd = branch --delete
+  brD = branch -D
+  brm = branch --move
+  bru = branch --set-upstream-to
 
-[diff]
-  external = difft --display=side-by-side-show-both
+  # ----------------------------------------
+  c = commit
+  ca = commit --all
+  cm = commit --message
+  cam = commit --all --message
+  cra = commit --reset-author
+  am = commit --amend
+  amend = commit --amend
+  amm = commit --amend --message
+  amne = commit --amend --no-edit
+
+  # ----------------------------------------
+  s = status
+  st = status -s
+
+  # ----------------------------------------
+  co = checkout
+  cob = checkout -b
+
+  # ----------------------------------------
+  d = diff
+  dc = diff --cached
+  cached = diff --cached
+
+  # ----------------------------------------
+  a = add
+  aa = add --all
+  ap = add --patch
+  patch = add --patch
+
+  # ----------------------------------------
+  ls = log --pretty=format:\"%C(yellow)%h%C(reset)%C(magenta)%d %C(white)%s %C(blue)[%al]  %C(auto)%ar%C(reset)\" --ext-diff
+  last = log --pretty=format:\"%C(yellow)%h%C(reset)%C(magenta)%d %C(white)%s %C(blue)[%al]  %C(auto)%ar%C(reset)\" --ext-diff -1 --stat
+  hist = log --pretty=format:\"%h|%as|%al|%s%d\" --ext-diff
+
+  # ----------------------------------------
+  r = remote
+  rv = remote -v
+  radd = remote add
+  rdel = remote rm
