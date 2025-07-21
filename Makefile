@@ -34,20 +34,19 @@ sethome:
 	echo "0 */2 * * * rm -rf ~/Inbox/*") | crontab -
 # }}}
 
-# asdf {{{
 PACKAGES = curl wget git links fish bash bash-completion command-not-found tmux
 .PHONY := $(PACKAGES)
 $(PACKAGES):
 	command -v $@ 2>&1 > /dev/null || $(SUDO) apt-get install -y $@
 
+# asdf {{{
 LATEST  := $(shell curl -sI https://github.com/asdf-vm/asdf/releases/latest | awk 'BEGIN{FS="/"}/^[Ll]ocation:/{print $$NF}')
 CURRENT := $(shell asdf version 2>/dev/null | awk '{print $$1}')
 .PHONY := asdf
 asdf:
 	if [ -z "$(CURRENT)" ] || [ "$(CURRENT)" != "$(LATEST)" ]; then \
-		wget -O asdf.tgz -nv https://github.com/asdf-vm/asdf/releases/download/"$(LATEST)"/asdf-"$(LATEST)"-linux-amd64.tar.gz && \
-		tar -zxvf asdf.tgz && $(SUDO) install asdf /usr/local/bin && \
-		rm asdf.tgz asdf; \
+		curl -LJO "https://github.com/asdf-vm/asdf/releases/download/$(LATEST)/asdf-$(LATEST)-linux-amd64.tar.gz" -o asdf.tgz \
+		tar -zxvf asdf.tgz && $(SUDO) install asdf /usr/local/bin && rm asdf.tgz asdf; \
 	fi
 # }}}
 
