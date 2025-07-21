@@ -46,7 +46,8 @@
   # ----------------------------------------
   d = diff
   dc = diff --cached
-  cached = diff --cached
+  cached = diff --cached --stat
+  staged = diff --staged
 
   # ----------------------------------------
   unadd = restore --staged
