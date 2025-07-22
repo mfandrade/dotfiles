@@ -23,13 +23,11 @@
 
   # ----------------------------------------
   uncommit = reset --soft HEAD~1
-  ; ca = commit --all
-  ; cm = commit --message
-  ; cra = commit --reset-author
   com = commit
-  ; coma = commit --all
   comm = commit --message
   comra = commit --reset-author
+  addcom = commit --all
+  addcomm = commit --all --message
   am = commit --amend
   amend = commit --amend
   amm = commit --amend --message
