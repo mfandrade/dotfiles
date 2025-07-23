@@ -1,6 +1,25 @@
 # cat
 alias cat='bat -n'
 
+# xsel
+function ctrlc
+    set -l file $argv[1]
+
+    if not count $argv >/dev/null
+        return 3
+    end
+
+    if not test -f "$file"
+        return 2
+    end
+
+    if file -bL --mime "$file" | grep -q 'binary$'
+        return 1
+    end
+
+    xsel --clipboard <"$file"
+end
+
 # git
 alias ga='git add'
 alias gaa='git add --all'
