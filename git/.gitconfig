@@ -29,8 +29,9 @@
   com = commit
   comm = commit --message
   comra = commit --reset-author
-  addcom = commit .
-  addcomm = commit . --message
+  addcom = commit --all
+  addcom = commit -am
+  ; addcomm = "!f() { git commit \"$1\" --message \"$2\"; }; f"
   am = commit --amend
   amend = commit --amend
   amm = commit --amend --message
@@ -70,6 +71,7 @@
   rem = remote --verbose
   radd = remote add
   rdel = remote rm
+	addcomm = "!f() { if [ -z \"$1\" ] || [ -z \"$2\" ]; then echo \"error: you need to inform file path and commit message\"; return 1; fi; git add '$1' && git commit -m '$2'; }; f"
 
 [pull]
   rebase = true
