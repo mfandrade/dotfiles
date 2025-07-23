@@ -9,6 +9,9 @@
 [commit]
   gpgSign = false
 
+[core]
+  editor = vim
+
 [diff]
   external = difft --display side-by-side --syntax-highlight off
 
@@ -26,8 +29,8 @@
   com = commit
   comm = commit --message
   comra = commit --reset-author
-  addcom = commit --all
-  addcomm = commit --all --message
+  addcom = commit .
+  addcomm = commit . --message
   am = commit --amend
   amend = commit --amend
   amm = commit --amend --message
