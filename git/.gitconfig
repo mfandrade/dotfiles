@@ -71,6 +71,9 @@
   radd = remote add
   rdel = remote rm
 
+  # ----------------------------------------
+  sync = !git pull && git push
+
 [pull]
   rebase = true
 
