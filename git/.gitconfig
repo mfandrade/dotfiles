@@ -70,7 +70,7 @@
   rem = remote --verbose
   radd = remote add
   rdel = remote rm
-	sync = "!f() { CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD); git pull; if [ $? -ne 0 ]; then PULL_OUTPUT=$(git pull 2>&1); if echo \"$PULL_OUTPUT\" | grep -q \"There is no tracking information for the current branch\"; then git branch --set-upstream-to=origin/\"$CURRENT_BRANCH\" \"$CURRENT_BRANCH\" && git pull; else echo \"$PULL_OUTPUT\"; return 1; fi; fi; git push; if [ $? -ne 0 ]; then git push -u origin \"$CURRENT_BRANCH\"; if [ $? -ne 0 ]; then return 1; fi; fi; }; f"
+	sync = "!f() { CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD); git pull 2>/dev/null; if [ $? -ne 0 ]; then PULL_OUTPUT=$(git pull 2>&1); if echo \"$PULL_OUTPUT\" | grep -q \"There is no tracking information for the current branch\"; then git branch --set-upstream-to=origin/\"$CURRENT_BRANCH\" \"$CURRENT_BRANCH\" && git pull; else echo \"$PULL_OUTPUT\"; return 1; fi; fi; git push; if [ $? -ne 0 ]; then git push -u origin \"$CURRENT_BRANCH\"; if [ $? -ne 0 ]; then return 1; fi; fi; }; f"
 
   # ----------------------------------------
 
