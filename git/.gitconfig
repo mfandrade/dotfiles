@@ -29,7 +29,7 @@
   com = commit
   comm = commit --message
   comra = commit --reset-author
-  addcom = commit --all
+  ; addcom = commit --all
   addcomm = commit --all --message
   am = commit --amend
   amend = commit --amend
