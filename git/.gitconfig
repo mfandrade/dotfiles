@@ -30,11 +30,11 @@
   comm = commit --message
   comra = commit --reset-author
   ; addcom = commit --all
-  addcomm = commit --all --message
-  am = commit --amend
+  allcomm = commit --all --message
+  a = commit --amend
   amend = commit --amend
-  amm = commit --amend --message
-  amne = commit --amend --no-edit
+  am = commit --amend --message
+  ane = commit --amend --no-edit
 
   # ----------------------------------------
   s = status
