@@ -59,8 +59,8 @@
   patch = add --patch
 
   # ----------------------------------------
-  hist = log --pretty=format:\"%C(yellow)%h%C(reset)%C(magenta)%d %C(white)%s %C(blue)[%al]  %C(auto)%ar%C(reset)\" --ext-diff
-  last = log --pretty=format:\"%C(yellow)%h%C(reset)%C(magenta)%d %C(white)%s %C(blue)[%al]  %C(auto)%ar%C(reset)\" --ext-diff -1 --stat
+  hist = log --pretty=format:\"%C(yellow)%h%C(reset)%C(magenta)%d %C(white)%s %C(blue)[%al]  %C(black)%ar%C(reset)\" --ext-diff
+  last = log --pretty=format:\"%C(yellow)%h%C(reset)%C(magenta)%d %C(white)%s %C(blue)[%al]  %C(black)%ar%C(reset)\" --ext-diff -1 --stat
   ls = log --pretty=format:\"%h | %as | %al | %s%d\" --ext-diff
 
   # ----------------------------------------
