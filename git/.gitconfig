@@ -77,7 +77,8 @@
 [pull]
   rebase = true
 
-[include]
-  path = ~/.gitconfig.extra
 [push]
 	autoSetupRemote = true
+
+[include]
+  path = ~/.gitconfig.extra
