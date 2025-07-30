@@ -79,3 +79,5 @@
 
 [include]
   path = ~/.gitconfig.extra
+[push]
+	autoSetupRemote = true
