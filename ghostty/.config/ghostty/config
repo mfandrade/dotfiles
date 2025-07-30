@@ -2,4 +2,10 @@
 
 theme = light:"GitHub-Light-Default",dark:"GitHub-Dark-High-Contrast"
 font-family = "JetBrainsMono Nerd Font"
-background-opacity = 0.85
+background-opacity = 0.80
+#cursor-opacity = 0.7
+#cursor-color = "#addc10"
+cursor-style = block
+cursor-style-blink = true
+cursor-invert-fg-bg = true
+shell-integration-features = no-cursor
