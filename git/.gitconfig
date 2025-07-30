@@ -49,7 +49,7 @@
 
   # ----------------------------------------
   d = diff
-  cached = diff --cached --stat
+  cached = diff --cached
   staged = diff --staged
 
   # ----------------------------------------
