@@ -1,6 +1,19 @@
 # cat
 alias cat='bat -n'
 
+# bak
+function bak
+    if test (count $argv) -ne 1
+        return 1
+    end
+
+    set original $argv[1]
+    set backup "$original.bak"
+
+    cp -iv $original $backup
+end
+
+
 # xsel
 function ctrlc
     set -l file $argv[1]
@@ -21,6 +34,7 @@ function ctrlc
 end
 
 # git
+alias g=git
 alias ga='git add'
 alias gaa='git add --all'
 alias gc='git commit'
@@ -37,10 +51,10 @@ alias gd='git diff'
 alias gdc='git diff --cached'
 
 # asdf
-alias apa='asdf plugin add'
-alias apl='asdf plugin list'
-alias apla='asdf plugin list all'
-function ailatest
+alias apadd='asdf plugin add'
+alias aplist='asdf plugin list'
+alias aplistall='asdf plugin list all'
+function alatest
     set -l plugin $argv[1]
     set -l latest latest
     if [ $plugin = java ]
@@ -49,18 +63,16 @@ function ailatest
     asdf install $plugin $latest && asdf set --home $plugin $latest
 end
 
+# nala
 function sudo
     if test (count $argv) -gt 0
         if test "$argv[1]" = apt -o "$argv[1]" = apt-get
-            # Shift the first argument ("apt" or "apt-get") and run with nala
             set -e argv[1]
             command sudo nala $argv
         else
-            # Execute the original sudo command
             command sudo $argv
         end
     else
-        # If no arguments, just run sudo (this might prompt for help or show usage)
         command sudo
     end
 end
