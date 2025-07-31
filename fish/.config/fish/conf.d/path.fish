@@ -1,3 +1,3 @@
 if status --is-login
-    set -gx PATH $PATH ~/bin
+    set -gx PATH $HOME/bin $PATH 
 end
