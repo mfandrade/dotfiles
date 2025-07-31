@@ -35,20 +35,6 @@ end
 
 # git
 alias g=git
-alias ga='git add'
-alias gaa='git add --all'
-alias gc='git commit'
-alias gca='git commit -a'
-alias gcm='git commit -m'
-alias gcam='git commit -am'
-alias gco='git checkout'
-alias gcob='git checkout -b'
-alias gst='git status -s'
-alias gr='git remote -v'
-alias grv='git remote -v'
-alias gra='git remote add'
-alias gd='git diff'
-alias gdc='git diff --cached'
 
 # asdf
 alias apadd='asdf plugin add'
