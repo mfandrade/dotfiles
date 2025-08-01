@@ -57,6 +57,7 @@
   d = diff
   cached = diff --cached
   staged = diff --staged
+	lsd = diff --stat
 
   # ----------------------------------------
   unadd = restore --staged
