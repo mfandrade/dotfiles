@@ -34,6 +34,11 @@ function ctrlc
     xsel --clipboard <"$file"
 end
 
+# tmux
+alias tn='tmux new-session'
+alias tl='tmux list-sessions'
+alias ta='tmux attach-session'
+
 # git
 alias g=git
 
