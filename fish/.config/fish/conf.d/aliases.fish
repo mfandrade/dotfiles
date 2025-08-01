@@ -43,9 +43,12 @@ alias ta='tmux attach-session'
 alias g=git
 
 # asdf
-alias apadd='asdf plugin add'
-alias aplist='asdf plugin list'
-alias aplistall='asdf plugin list all'
+alias apa='asdf plugin add'
+alias apl='asdf plugin list'
+alias apla='asdf plugin list all'
+alias al='asdf list'
+alias ala='asdf list all'
+alias au='asdf uninstall'
 function alatest
     set -l plugin $argv[1]
     set -l latest latest
