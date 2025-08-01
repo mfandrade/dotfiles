@@ -15,6 +15,12 @@
 [diff]
   external = difft --display side-by-side --syntax-highlight off
 
+[url "git@github.com:mfandrade/"]
+  insteadOf = "my:"
+
+[url "git@github.com:"]
+  insteadOf = "gh:"
+
 [alias]
   # ----------------------------------------
   br = branch
