@@ -37,7 +37,13 @@ end
 # tmux
 alias tn='tmux new-session'
 alias tl='tmux list-sessions'
-alias ta='tmux attach-session'
+function ta
+    if not tmux ls >/dev/null 2>&1
+        tmux new -s ($argv)
+    else
+        tmux attach -t ($argv)
+    end
+end
 
 # git
 alias g=git
