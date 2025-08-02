@@ -49,12 +49,15 @@ end
 alias g=git
 
 # asdf
-alias apa='asdf plugin add'
-alias apl='asdf plugin list'
-alias apla='asdf plugin list all'
-alias al='asdf list'
-alias ala='asdf list all'
-alias au='asdf uninstall'
+alias apadd='asdf plugin add'
+alias aplist='asdf plugin list'
+alias aplistall='asdf plugin list all'
+function apsearch
+    asdf plugin list all | grep $argv
+end
+alias alist='asdf list'
+alias alistall='asdf list all'
+alias auninstall='asdf uninstall'
 function alatest
     set -l plugin $argv[1]
     set -l latest latest
