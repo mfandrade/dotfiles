@@ -16,12 +16,11 @@ end
 
 # xsel
 function ctrlc
-
-    if not count $argv >/dev/null
+    if test (count $argv) -ne 1
         return 3
     end
 
-    set -l file $argv[1]
+    set file $argv[1]
 
     if not test -f "$file"
         return 2
