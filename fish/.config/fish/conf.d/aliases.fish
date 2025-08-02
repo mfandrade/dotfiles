@@ -52,6 +52,22 @@ end
 
 # git
 alias g=git
+function git_alias_to_shell
+    set lines (git config --get-regexp '^alias\.' | sort)
+
+    for line in $lines
+        set raw_key (echo $line | cut -d' ' -f1)
+        set key (echo $raw_key | sed 's/^alias\.//')
+        set value (echo $line | cut -d' ' -f2-)
+
+        if string match -rq '^!' $value
+            set shell_cmd (string replace -r '^!' '' $value)
+            eval "function g$key; $shell_cmd; end"
+        else
+            alias g$key="git $value"
+        end
+    end
+end
 
 # asdf
 alias apadd='asdf plugin add'

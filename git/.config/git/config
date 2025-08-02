@@ -57,6 +57,8 @@
   insteadOf = "gh:"
 
 [alias]
+  aliases = "!git config --get-regexp '^alias\\.' | sed -E 's/^alias\\.//; s/ / = /' | sort"
+
   cl = clone
 
   br = branch
