@@ -36,11 +36,17 @@ end
 # tmux
 alias tn='tmux new-session'
 alias tl='tmux list-sessions'
-function ta
-    if not tmux ls >/dev/null 2>&1
-        tmux new -s ($argv)
+function tt
+    set session unnamed
+    if test (count $argv) -gt 0
+        set session $argv[1]
+    end
+
+    tmux has-session -t "$session" ^/dev/null
+    if test $status -eq 0
+        tmux attach-session -t "$session"
     else
-        tmux attach -t ($argv)
+        tmux new-session -s "$session"
     end
 end
 
