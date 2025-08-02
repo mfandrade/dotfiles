@@ -53,6 +53,7 @@
   cob = checkout -b
   discard = checkout
   discard-all = checkout .
+	file = "!f() { git checkout $2 -- $1 }; f"
 
   # ----------------------------------------
   d = diff
