@@ -38,5 +38,5 @@ debug:*) EMOJI="🧪" ;;
 esac
 
 if [ -n "$EMOJI" ]; then
-  sed -i "1s/^\([a-zA-Z_-]*:\)\(.*\)/\1${EMOJI}\2/" "$MSG_FILE"
+  sed -i "1s/^\([a-zA-Z ]*:\)\(.*\)/\1${EMOJI}\2/" "$MSG_FILE"
 fi
