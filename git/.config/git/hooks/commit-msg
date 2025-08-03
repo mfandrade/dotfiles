@@ -33,7 +33,7 @@ case "$FIRST_LINE" in
     chore:*) EMOJI="🧹" ;;
     style:*) EMOJI="💅" ;;
     refactor:*) EMOJI="🔨" ;;
-    docs:*) EMOJI="📜" ;;
+    docs:*) EMOJI="📃" ;;
     test:*) EMOJI="🚦" ;;
     ci:*) EMOJI="📦" ;;
     deploy:*) EMOJI="🚀" ;;

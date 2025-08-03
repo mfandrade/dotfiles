@@ -104,7 +104,7 @@
     graph = "!f() { git log --color=always --graph --all --pretty=format:'%C(yellow)%h %C(cyan)%an  %C(black)%ar%C(auto)  %D%n%s%n' | less -FRSX; }; f"
     hist = "!f() { git log --color=always --pretty=format:'%C(yellow)%h%C(reset)%C(magenta)%d %C(white)%s %C(blue)[%al]  %C(black)%ar%C(reset)' | less -FRSX; }; f"
     last = log --pretty=format:\"%C(yellow)%h%C(reset)%C(magenta)%d %C(white)%s %C(blue)[%al]  %C(black)%ar%C(reset)\" -1 --stat
-    ls = "!git log --pretty=format:'%h | %as | %al | %s%d' --reverse | sed -E 's/[✨🩹🧹💅🔨📜🚦📦🚀🏃🧪🚨]//g'"
+    ls = "!git log --pretty=format:'%h | %as | %al | %s%d' --reverse | sed -E 's/[✨🩹🧹💅🔨📃🚦📦🚀🏃🧪🚨]//g'"
 
     r = remote
     rem = remote --verbose
