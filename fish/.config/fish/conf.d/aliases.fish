@@ -78,7 +78,14 @@ function apsearch
 end
 alias alist='asdf list'
 alias alistall='asdf list all'
-alias auninstall='asdf uninstall'
+function auninstall
+    set -l plugin $argv[1]
+    if test (count (asdf list $plugin)) -gt 0
+        for v in (asdf list $plugin)
+            asdf uninstall $plugin $v
+        end
+    end
+end
 function alatest
     set -l plugin $argv[1]
     set -l latest latest
