@@ -68,6 +68,7 @@ function git_alias_to_shell
         end
     end
 end
+git_alias_to_shell
 
 # asdf
 alias apadd='asdf plugin add'
