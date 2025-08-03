@@ -16,6 +16,7 @@ if grep -q "^GLYPH=" "$MSG_FILE"; then
   0 | no | n | false) exit 0 ;;
   esac
 fi
+sed -i '/^GLYPH=/d' "$MSG_FILE"
 
 FIRST_LINE=$(head -n 1 "$MSG_FILE")
 
