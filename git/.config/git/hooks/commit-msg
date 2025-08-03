@@ -1,0 +1,41 @@
+#!/bin/sh
+
+MSG_FILE="$1"
+
+# Verifica variável GLYPH=no
+if [ -n "$GLYPH" ]; then
+  VAL=$(echo "$GLYPH" | tr '[:upper:]' '[:lower:]' | tr -d '[:space:]')
+  case "$VAL" in
+  0 | no | n | false) exit 0 ;;
+  esac
+fi
+
+if grep -q "^GLYPH=" "$MSG_FILE"; then
+  VALOR=$(grep "^GLYPH=" "$MSG_FILE" | cut -d= -f2 | tr '[:upper:]' '[:lower:]' | tr -d '[:space:]')
+  case "$VALOR" in
+  0 | no | n | false) exit 0 ;;
+  esac
+fi
+
+FIRST_LINE=$(head -n 1 "$MSG_FILE")
+
+case "$FIRST_LINE" in
+feat:*) EMOJI="✨" ;;
+fix:*) EMOJI="🩹" ;;
+chore:*) EMOJI="🧹" ;;
+style:*) EMOJI="💅" ;;
+refactor:*) EMOJI="🔨" ;;
+docs:*) EMOJI="📜" ;;
+test:*) EMOJI="🚦" ;;
+ci:*) EMOJI="📦" ;;
+deploy:*) EMOJI="🚀" ;;
+perf:*) EMOJI="🏃" ;;
+debug:*) EMOJI="🧪" ;;
+"BREAKING CHANGE:"*) EMOJI="🚨" ;;
+*) EMOJI="" ;;
+esac
+
+# Aplica o emoji depois do tipo:
+if [ -n "$EMOJI" ]; then
+  sed -i "1s/^\([a-zA-Z_-]*:\)\(.*\)/\1${EMOJI}\2/" "$MSG_FILE"
+fi
