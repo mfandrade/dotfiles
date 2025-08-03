@@ -42,7 +42,7 @@ function tt
         set session $argv[1]
     end
 
-    tmux has-session -t "$session" ^/dev/null
+    tmux has-session -t "$session" >/dev/null 2>&1
     if test $status -eq 0
         tmux attach-session -t "$session"
     else
