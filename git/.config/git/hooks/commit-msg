@@ -6,19 +6,23 @@ MSG_FILE="$1"
 if [ -n "$GLYPH" ]; then
     VAL=$(echo "$GLYPH" | tr '[:upper:]' '[:lower:]' | tr -d '[:space:]')
     case "$VAL" in
-        0 | no | n | false) exit 0 ;;
+        no | n | 0 | false) exit 0 ;;
     esac
 fi
 
 # checks for GLYPH=no uncommented in the body message
-if grep -iqE '^GLYPH=(no|n|0|false)$' "$MSG_FILE"; then
+if grep -iE '^GLYPH=(no|n|0|false)$' "$MSG_FILE"; then
+    echo "RAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA..."
     sed -i '/^GLYPH=/d' "$MSG_FILE"
     exit 0
 fi
 
 # if the HEAD's hash is the same as the staging hash, it's an amend
-if [ "$(git rev-parse HEAD)" = "$(git write-tree)" ]; then
-    exit 0
+if git rev-parse HEAD >/dev/null 2>&1; then
+    if [ "$(git rev-parse HEAD)" = "$(git write-tree)" ]; then
+        # É um amend — HEAD tem mesmo hash que staging
+        exit 0
+    fi
 fi
 
 FIRST_LINE=$(head -n 1 "$MSG_FILE")
