@@ -11,7 +11,7 @@ if [ -n "$GLYPH" ]; then
 fi
 
 # checks for GLYPH=no uncommented in the body message
-if grep -iE '^GLYPH=(no|n|0|false)$' "$MSG_FILE"; then
+if grep -iqE '^GLYPH=(no|n|0|false)' "$MSG_FILE"; then
     echo "RAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA..."
     sed -i '/^GLYPH=/d' "$MSG_FILE"
     exit 0
