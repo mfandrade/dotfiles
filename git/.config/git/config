@@ -95,6 +95,12 @@
     lsd = diff --stat
     cached = diff --cached
     staged = diff --staged
+    view = "!f() { \
+        ref=${1:-HEAD}; \
+        base=$(git rev-parse --verify \"$ref^\" 2>/dev/null || git hash-object -t tree /dev/null); \
+        git show --no-patch --pretty=format:\"%C(auto)%h %s\" \"$ref\" && echo && \
+        (git difftool \"$base\" \"$ref\"; git diff --stat \"$base\" \"$ref\") ; \
+        }; f"
 
     unadd = restore --staged
     unstage = restore --staged
