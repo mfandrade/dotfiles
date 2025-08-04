@@ -1,4 +1,4 @@
-# cat
+# bat
 alias cat='bat -n'
 
 # bak
@@ -6,30 +6,18 @@ function bak
     if test (count $argv) -ne 1
         return 1
     end
-
-    set original $argv[1]
-    set backup "$original.bak"
-
-    cp -iv $original $backup
+    cp -iv $argv[1] "$argv[1].bak"
 end
 
-
-# xsel
+# ctrlc
 function ctrlc
-    if test (count $argv) -ne 1
-        return 3
-    end
-
-    set file $argv[1]
-
-    if not test -f "$file"
+    set -l file $argv[1]
+    if test -z "$file" -o ! -f "$file"
         return 2
     end
-
     if file -bL --mime "$file" | grep -q 'binary$'
         return 1
     end
-
     xsel --clipboard <"$file"
 end
 
@@ -37,79 +25,57 @@ end
 alias tn='tmux new-session'
 alias tl='tmux list-sessions'
 function tt
-    set session unnamed
-    if test (count $argv) -gt 0
-        set session $argv[1]
-    end
-
+    set -l session (count $argv) >/dev/null; and set session $argv[1]; or set session UNNAMED
     tmux has-session -t "$session" >/dev/null 2>&1
-    if test $status -eq 0
-        tmux attach-session -t "$session"
-    else
-        tmux new-session -s "$session"
-    end
+    and tmux attach-session -t "$session"
+    or tmux new-session -s "$session"
 end
 
 # git
 alias g=git
-function aliases_for_git
+function load_git_aliases
     set -l commands (git --list-cmds=main,nohelpers | sort)
-    set -l aliases (git config --get-regexp '^alias\.' | sort)
-    set -l lines (printf "%s\n" $commands $aliases)
-
-    for line in $lines
-        set -l raw_key (echo $line | cut -d' ' -f1)
-        set -l key (echo $raw_key | sed 's/^alias\.//')
-        set -l value (echo $line | cut -d' ' -f2-)
-
-        if test -n "$value"
-            if string match -rq '^!' $value
-                set -l shell_cmd (string replace -r '^!' '' $value)
-                eval "function g$key; $shell_cmd; end"
-            else
-                alias g$key="git $value"
-            end
-        else
-            alias g$key="git $key"
-        end
+    for cmd in $commands
+        alias g$cmd="git $cmd"
     end
 end
-aliases_for_git
 
 # asdf
 alias apadd='asdf plugin add'
 alias aplist='asdf plugin list'
 alias aplistall='asdf plugin list all'
+alias alist='asdf list'
+alias alistall='asdf list all'
+
 function apsearch
     asdf plugin list all | grep $argv
 end
-alias alist='asdf list'
-alias alistall='asdf list all'
+
 function auninstall
     set -l plugin $argv[1]
-    if test (count (asdf list $plugin)) -gt 0
+    if test -n "$plugin"
         for v in (asdf list $plugin)
             asdf uninstall $plugin $v
         end
     end
 end
+
 function alatest
     set -l plugin $argv[1]
-    set -l latest latest
-    if [ $plugin = java ]
-        set latest "latest:openjdk"
-    end
+    set -l latest (test "$plugin" = java; and echo "latest:openjdk"; or echo latest)
     asdf install $plugin $latest && asdf set --home $plugin $latest
 end
 
 # nala
 function sudo
-    if test (count $argv) -gt 0
-        if test "$argv[1]" = apt -o "$argv[1]" = apt-get
-            set -e argv[1]
+    set -l cmd $argv[1]
+    set -e argv[1]
+
+    if test -n "$cmd"
+        if string match -q "$cmd" apt apt-get
             command sudo nala $argv
         else
-            command sudo $argv
+            command sudo $cmd $argv
         end
     else
         command sudo
