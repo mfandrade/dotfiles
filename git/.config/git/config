@@ -73,7 +73,7 @@
     com = commit
     comm = commit --message
     comra = commit --reset-author
-    allcomm = commit --all --message
+    allcom = commit --all --verbose
     a = commit --amend
     amend = commit --amend
     am = commit --amend --message
