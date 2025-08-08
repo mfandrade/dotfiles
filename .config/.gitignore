@@ -1,0 +1,11 @@
+*
+!.gitignore
+!bin/
+!docker/
+!fish/
+!ghostty/
+!git/
+!nvim/
+!mc/
+!tmux/
+!user-dirs.dirs
