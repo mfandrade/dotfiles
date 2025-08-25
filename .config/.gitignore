@@ -6,6 +6,7 @@
 !docker/**
 !fish/
 !fish/**
+fish/fish_variables
 !ghostty/
 !ghostty/**
 !git/
