@@ -60,6 +60,8 @@
 [alias]
     aliases = "!git config --get-regexp '^alias\\.' | sed -E 's/^alias\\.//; s/ / = /' | sort"
 
+    kickoff = "!git init . && git checkout -b main && touch .gitignore && git add . && git commit --allow-empty -am 'feat: initial commit'"
+
     cl = clone
 
     br = branch
@@ -87,7 +89,7 @@
     cob = checkout -b
     discard = checkout
     discard-all = checkout .
-    copy = "!f() { git checkout $2 -- $1 }; f"
+    copy = "!sh -c 'git checkout $2 -- $1' -"
 
     d = diff --color-words
     dt = difftool
